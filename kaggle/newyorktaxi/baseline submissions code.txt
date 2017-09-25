@@ -1,0 +1,68 @@
+#new baseline model with simple feature engineering
+new_train <- train %>%
+  mutate(wday = wday(pickup_datetime), month = month(pickup_datetime), hour = hour(pickup_datetime)) %>%
+  select(-c(id,pickup_datetime,dropoff_datetime))
+
+new_train$ltrip <- with(    new_train, sqrt( ( (pickup_longitude - dropoff_longitude) ^ 2) + ((pickup_latitude - dropoff_latitude) ^ 2))      )
+new_train <- new_train %>%
+    select(-c(pickup_longitude,dropoff_longitude,pickup_latitude,dropoff_latitude))
+new_train$ltrip <- new_train$ltrip*1000
+new_train <- new_train[new_train$trip_duration < 4000,]
+summary(new_train)
+new_train_val <- new_train[,c('trip_duration','ltrip')][order(new_train$ltrip,decreasing=T),]
+new_train <- new_train[new_train$ltrip < 250,]
+hist(new_train$ltrip,breaks=1000)
+hist(new_train$trip_duration, breaks=1000)
+
+
+#linear model
+lr_model <- lm(data = new_train, trip_duration ~ .)
+summary(lr_model)
+try_train <- subset(new_train, select = -c(vendor_id,store_and_fwd_flag))
+try_lr_model <- lm(data = try_train, trip_duration ~ .)
+summary(try_lr_model)
+
+
+#decision tree model
+dt_model <- rpart(data = new_train, trip_duration ~ .)
+summary(dt_model)
+try_dt_model <- rpart(data = try_train, trip_duration ~ .)
+summary(try_dt_model)
+
+
+
+#converting test data like as new_train
+new_test <- test %>%
+  mutate(wday = wday(pickup_datetime), month = month(pickup_datetime), hour = hour(pickup_datetime)) %>%
+  select(-c(id,pickup_datetime))
+
+new_test$ltrip <- with(    new_test, sqrt( ( (pickup_longitude - dropoff_longitude) ^ 2) + ((pickup_latitude - dropoff_latitude) ^ 2))      )
+new_test <- new_test %>%
+  select(-c(pickup_longitude,dropoff_longitude,pickup_latitude,dropoff_latitude))
+new_test$ltrip <- new_test$ltrip*1000
+
+#prediction using lr_model
+pred_lr_baseline <- predict(lr_model, newdata = new_test)
+pred_lr_baseline_df <- data.frame(test$id, pred_lr_baseline)
+colnames(pred_lr_baseline_df) <- c('id','trip_duration')
+write.csv(pred_lr_baseline_df, file='nytaxi_lr_baseline.csv',row.names = FALSE)
+
+#prediction using try_lr_model
+try_test <- subset(new_test, select = -c(vendor_id,store_and_fwd_flag))
+pred_trylr_baseline <- predict(try_lr_model, newdata = new_test)
+pred_trylr_baseline_df <- data.frame(test$id, pred_trylr_baseline)
+colnames(pred_trylr_baseline_df) <- c('id','trip_duration')
+write.csv(pred_trylr_baseline_df, file='nytaxi_trylr_baseline.csv',row.names = FALSE)
+
+
+#prediction using dt_model
+pred_dt_baseline <- predict(dt_model, newdata = new_test)
+pred_dt_baseline_df <- data.frame(test$id, pred_dt_baseline)
+colnames(pred_dt_baseline_df) <- c('id','trip_duration')
+write.csv(pred_dt_baseline_df, file='nytaxi_dt_baseline.csv',row.names = FALSE)
+
+#prediction using try_dt_model
+pred_trydt_baseline <- predict(try_dt_model, newdata = try_test)
+pred_trydt_baseline_df <- data.frame(test$id, pred_trydt_baseline)
+colnames(pred_trydt_baseline_df) <- c('id','trip_duration')
+write.csv(pred_trydt_baseline_df, file='nytaxi_trydt_baseline.csv',row.names = FALSE)

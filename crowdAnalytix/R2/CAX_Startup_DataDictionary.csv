@@ -1,0 +1,51 @@
+Variables,Description,Scale
+Dependent,"0- Company Failed, 1- Company is successful",Binary
+Company_Location,Location of Headquarter of company,Nominal
+Company_raising_fund,If company has been raising funds recently,Binary
+Company_Industry_count,Number of Industry company is catering to,Continuous
+Company_mobile_app,If company has mobile application,Binary
+Company_investor_count_seed,Number of investor in seed funding,Continuous
+Company_investor_count_Angel_VC,Number of investor in Angel or VC funding,Continuous
+Company_cofounders_count,Number of cofounders,Continuous
+Company_advisors_count,Number of company advisors,Continuous
+Company_senior_team_count,Number of top management employees,Continuous
+Company_top_Angel_VC_funding,If company has been funded by top Angel or VC funds,Binary
+Company_repeat_investors_count,Number of investors who invested 2nd or more times,Continuous
+Founders_top_company_experience,"If founder or co-founder has worked top tech companies(Google, Microsoft, Amazon, FB, Twitter, IBM, yahoo and Oracle)",Binary
+Founders_previous_company_employee_count,Average employee size of previous company of founders,Ordinal
+Founders_startup_experience,If founders or co-founders have previously worked in a startup,Binary
+Founders_big_5_experience,If founders or co-founders have previously worked in a any of big 5 consulting firm,Binary
+Company_business_model,"If company business model is B2B, B2C or both",Nominal
+Founders_experience,Average experience of founders,Ordinal
+Founders_global_exposure,If founders have global exposure (worked outside the country of their education),Binary
+Founders_Industry_exposure,Industry exposure of founders,Ordinal
+Founder_education,Founder highest education category,Nominal
+Founder_university_quality,Categorization of Ranking of Founder educational institute,Ordinal
+Founders_Popularity,If founder is renown in professional circle,Binary
+Founders_fortune1000_company_score,Score of experince of working in fortune 1000 company,Continuous
+Founders_profile_similarity,Profile similarity score of founders,Ordinal
+Founders_publications,Number of publications by founders,Ordinal
+Founders_skills_score,Overall skill score of founders,Ordinal
+Founders_Entrepreneurship_skills_score,Enterpreneurship skill score of founders,Ordinal
+Founders_Operations_skills_score,Operational skill score of founders,Ordinal
+Founders_Engineering_skills_score,Engineering skill score of founders,Ordinal
+Founders_Marketing_skills_score,Marketing skill score of founders,Ordinal
+Founders_Leadership_skills_score,Leadership skill score of founders,Ordinal
+Founders_Data_Science_skills_score,Data science skill score of founders,Ordinal
+Founders_Business_Strategy_skills_score,Business strategy skill score of founders,Ordinal
+Founders_Product_Management_skills_score,Product management skill score of founders,Ordinal
+Founders_Sales_skills_score,Sales skill score of founders,Ordinal
+Founders_Domain_skills_score,Domain knowledge score of founders,Ordinal
+Company_incubation_investor,If company has been funded by top incubators,Ordinal
+Company_competitor_count,Number of direct competitors of company,Continuous
+Company_1st_investment_time,Time in months to get 1st investment,Continuous
+Company_avg_investment_time,Averge time in months between multiple rounds of investment,Continuous
+Company_crowdsourcing,If company is crowdsourcing related,Binary
+Company_crowdfunding,If company is crowdfunding related,Binary
+Company_big_data,If company is big data related,Binary
+Company_analytics_score,Analytics score of company (level of analytics they are doing),Ordinal
+Company_Product_or_service,If company is product or service based,Nominal
+Company_subscription_offering,If company is offering subscription,Nominal
+Founder_highest_degree_type,Founder highest education type,Nominal
+Company_difficulty_obtaining_workforce,level of difficulty in obtaining workforce,Ordinal
+Company_Founder_Patent,If company or founders have patent,Nominal
